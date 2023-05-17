@@ -16,7 +16,7 @@ def number_to_ghz(number: int) -> str:
     A = 27.0  # ghz
     
     num_at_octo = number % octo_size
-    new_A = A * (2 ** (number // (octo_size - 1)))
+    new_A = A * (2 ** ((number // octo_size) - 1))
     
     config = {
         9: new_A,
