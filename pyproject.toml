@@ -3,14 +3,25 @@ name = "mid-to-gcode"
 version = "0.0.0a"
 description = "The project for translate .mid format to 3d printers gcode "
 authors = ["GigantPro <pochtagigantpro@gmail.com>"]
-readme = "README.md"
+readme = "README.rst"
 packages = [{include = "mid_to_gcode"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
 mido = "^1.2.10"
 
+[tool.poetry.group.dev.dependencies]
+setuptools = "67.6.1"
+pylint = "2.17.1"
+pytest = "7.2.2"
+twine = "4.0.2"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+build = "scripts.build:build"
+public = "scripts.public:public"
+linting = "scripts.pylint:start_linting"
+clean = "scripts.autoclean:autoclean"
