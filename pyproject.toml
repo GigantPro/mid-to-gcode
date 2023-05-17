@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "mid-to-gcode"
+version = "0.0.0a"
+description = "The project for translate .mid format to 3d printers gcode "
+authors = ["GigantPro <pochtagigantpro@gmail.com>"]
+readme = "README.md"
+packages = [{include = "mid_to_gcode"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
