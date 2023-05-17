@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "mid-to-gcode"
-version = "0.0.0a"
+version = "0.0.0a1"
 description = "The project for translate .mid format to 3d printers gcode "
 authors = ["GigantPro <pochtagigantpro@gmail.com>"]
 readme = "README.rst"
