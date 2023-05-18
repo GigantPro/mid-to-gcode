@@ -6,7 +6,7 @@ from .functions import prepearing, convert_to_gcode
 class MidToGcode:
     def __init__(self, track_name: str) -> None:
         self.track_name = track_name
-        self.track, self.track_config = prepearing(MidiFile('Example.mid'))
+        self.track, self.track_config = prepearing(MidiFile(self.track_name))
         
         self.gcode = convert_to_gcode(self.track, self.track_config)
 
