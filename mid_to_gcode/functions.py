@@ -29,6 +29,10 @@ def prepearing(mid_file: MidiFile) -> tuple[MidiTrack, dict[str, Any]]:
             
             elif last_note and msg.velocity != 0:
                 use_accords_flag = True
+                
+        elif msg.type == 'note_off' and last_note:
+            new_track.append(msg)
+            last_note = None
 
         elif msg.type == 'control_change':
             config['control_change'].append({
