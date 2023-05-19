@@ -1,17 +1,28 @@
-from typing import Iterable, Iterator
+from typing import Iterator
+
+from mido import MidiTrack
 
 
-def pair_range(subject: Iterable) -> Iterator:
-    last = None
+def accords_range(subject: MidiTrack) -> Iterator:
+    accord = []
+    count_closed = 0
     for item in subject:
-        if last:
-            yield last, item
-            last = None
+        if count_closed == len(accord) and accord:
+            yield accord
+            accord.clear()
+            count_closed = 0
         
-        else:
-            last = item
+        if item.type == 'note_on':
+            accord.append(item)
+        elif item.type == 'note_off':
+            for note in accord:
+                if note.note == item.note:
+                    accord[accord.index(note)].time = note.time + item.time
+                    break
+            count_closed += 1
+    return accord
 
-def number_to_ghz(number: int) -> str:
+def number_to_ghz(number: int) -> float:
     octo_size = 12
     A = 27.0  # ghz
     
@@ -35,4 +46,18 @@ def number_to_ghz(number: int) -> str:
     config[0] = config[1] * 0.9375
 
     ghz_str = str(config[num_at_octo])
-    return ghz_str[:2 + ghz_str.index('.')]
+    return float(ghz_str[:2 + ghz_str.index('.')])
+
+def get_time_per_note(notes: list) -> float:
+    sr = get_sr_per_note(notes)
+
+    # if sr > 70:
+    #     return 70
+    return sr
+
+def get_sr_per_note(notes: list) -> float:
+    sum_ = 0
+    for note in notes:
+        sum_ += note.time
+
+    return sum_ / len(notes)
